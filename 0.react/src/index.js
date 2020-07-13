@@ -4,35 +4,30 @@ import ReactDOM from 'react-dom';
 class Form extends React.Component{
     constructor(props) {
         super(props);
-        this.textInput = React.createRef();
+        this.state = {number: 0, name: 'zy'};
     }
-    getFocus = () => {
-      this.textInput.current.textInput.current.focus();
-      console.log(this.textInput.current.textInput.current.focus)// TextInput类的实例
+    //state 异步更新
+    add = () => {
+    //   this.state.number = this.state.number + 1;
+    //   this.setState({number:this.state.number+1});
+    //   console.log(this.state.number); // 0  this.state.number读到的是0 
+    //   this.setState({number:this.state.number+1});
+    //   console.log(this.state.number);// 0
+    //当调用setState的时候 其实状态并没有改变 而是放入一个队列中
+      this.setState((state)=>({number:state.number+1}), () => {
+          console.log(this.state); // 2
+      });
+      console.log(this.state.number);// 0
+      this.setState((state)=>({number:state.number+1}))
+      console.log(this.state.number);// 0
     }
     render() {
         return (
             <>
-            <TextInput3 ref={this.textInput} />
-            <button onClick={this.getFocus}>focus</button>
+            <p>{this.state.name}{this.state.number}</p>
+            <button onClick={this.add}>+</button>
             </>
         )
-    }
-}
-
-function TextInput2(props, ref) {
-  return <input ref={ref} />
-}
-let TextInput3 = React.forwardRef(TextInput2)
-class TextInput extends React.Component{
-  constructor(props) {
-    super(props);
-    this.textInput = React.createRef();
-}
-    render() {
-        return (
-             <input ref={this.textInput} />
-        );
     }
 }
 ReactDOM.render(<Form/>, document.getElementById('root'));
