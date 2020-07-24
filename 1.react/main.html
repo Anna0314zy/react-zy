@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="counter-app"></div>
+</body>
+<script src='./index.js'></script>
+<script>
+
+    // 复用button
+    let countApp = document.getElementById('counter-app');
+    // countApp.appendChild(new Counter({name:'zuuug', number:0}).render());
+    new Counter({name:'珠峰架构'}).mount(countApp);
+</script>
+</html>

@@ -4,30 +4,38 @@ import ReactDOM from 'react-dom';
 class Form extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {number: 0, name: 'zy'};
+        this.state={text:'hello'}
     }
-    //state 异步更新
     add = () => {
-    //   this.state.number = this.state.number + 1;
-    //   this.setState({number:this.state.number+1});
-    //   console.log(this.state.number); // 0  this.state.number读到的是0 
-    //   this.setState({number:this.state.number+1});
-    //   console.log(this.state.number);// 0
-    //当调用setState的时候 其实状态并没有改变 而是放入一个队列中
-      this.setState((state)=>({number:state.number+1}), () => {
-          console.log(this.state); // 2
-      });
-      console.log(this.state.number);// 0
-      this.setState((state)=>({number:state.number+1}))
-      console.log(this.state.number);// 0
+        console.log(this.state.text);
+    }
+    handlchange = (event) => {
+        this.setState({text:event.target.value});
+    }
+    //给子组件传方法  子组件调用给父组件传值
+    changeText = (text) => {
+        console.log(text, 'text')
+        this.setState({text});
     }
     render() {
         return (
             <>
-            <p>{this.state.name}{this.state.number}</p>
-            <button onClick={this.add}>+</button>
+            <input value={this.state.text} onChange={this.handlchange}/>
+            <Son text={this.state.text} name={this.props.name} changeText={this.changeText}/>
+            <button onClick={this.add}>add</button>
             </>
         )
     }
+}
+class Son extends React.Component{
+   render() {
+    return (
+        <>
+        <div>text:{this.props.text}</div> 
+        <input ref="myInput"></input>
+        <button onClick={()=>this.props.changeText(this.refs.myInput.value)}>改变状态</button>
+        </>
+    )
+   }
 }
 ReactDOM.render(<Form/>, document.getElementById('root'));
