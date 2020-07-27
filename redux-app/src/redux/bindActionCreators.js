@@ -15,3 +15,4 @@ function bindActionCreator(actionCreator, dispatch) {
      }
      return bindActionCreators;
  }
+//  bindActionCreators的作用是将一个或多个action和dispatch组合起来生成
