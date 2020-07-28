@@ -3,14 +3,14 @@ import actions from '../store/actions/counter';
 import {connect} from '../react-redux';
  class Counter extends Component{
    render(){
-       console.log(this.props);
+       console.log(this.props, 'this.props---');
        return (
            <>
              <p>{this.props.number}</p>
              <button onClick={this.props.increment}>+</button>
              <button onClick={this.props.decrement}>-</button>
-             {/* <button onClick={this.props.asyncIncrement}>过一秒后加1</button>
-             <button onClick={this.props.promiseIncrement}>promise加1</button> */}
+             <button onClick={this.props.asyncIncrement}>过一秒后加1</button>
+             <button onClick={this.props.promiseIncrement}>promise加1</button>
            </>
        )
    }
@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
 //conect负责连接仓库和组件
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
-    // actions
+    // mapDispatchToProps
+    actions
 )(Counter);

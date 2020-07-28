@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Counter from './components/Counter';
 import {Provider} from './react-redux';
 import store from './store';
-console.log(store, 'index-store');
+// console.log(store, 'index-store');
 ReactDOM.render((
     <Provider store={store}>
         <Counter/>

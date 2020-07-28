@@ -2,6 +2,8 @@ import { createStore, applyMiddleware} from '../redux';
 import reducers from './reducers';
 import logger1 from '../react-logger'
 import logger2 from '../react-logger2'
+import thunk from '../redux-thunk'
+import promise from '../rudux-promise'
 
 
 /**
@@ -11,7 +13,8 @@ import logger2 from '../react-logger2'
  * 新状态2
  * 新状态1
  */
-let store = applyMiddleware(logger1,logger2)(createStore)(reducers);
+let thunkWithExtraArgument = thunk.withExtraArgument({number:5});
+let store = applyMiddleware(thunkWithExtraArgument,promise,logger1,logger2)(createStore)(reducers);
 // console.log(store, 'store---index');
 //此处赋初始值优先级最高
 // const store = createStore(reducers);

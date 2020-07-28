@@ -14,7 +14,7 @@ function compose(...funcs) {
     }
     return funcs.reduce((func, next)=>(...args) => func(next(...args)));
 }
-let result = compose(add1, add2, add3)('zhufeng');
-console.log(result); 
-// export default compose;
+// let result = compose(add1)('zhufeng');
+// console.log(result, 'result------'); 
+export default compose;
 //123zhufeng
