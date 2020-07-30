@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id="root"></div> -->
+    <button onClick="push('/a')">/a</button>
+    <button onClick="push('/b')">/b</button>
+    <button onClick="push('/c')">/c</button>
+    <div id="root" style="border: 3px solid red;height: 200px;"></div>
+
+
+</body>
+<script>
+    let container = document.getElementById('root');
+    //监听弹出状态的事件
+    window.onpopstate = event => {
+        console.log(event);
+        container.innerHTML = event.state && event.state.to;
+    }
+    function push(to) {
+        //三个参数 state 标题（已经废弃） 
+        //pushState 入栈不会触发onpopstate
+        window.history.pushState({to}, null, to);
+    }
+    window.onpushState = function(state, title, path) {
+        container.innerHTML = state.to || path;
+
+    }
+    //重写
+    let oldPush = window.history.pushState;
+    window.history.pushState = function(state, title, path) {
+        // console.log(state);
+        oldPush.call(window.history,state, title, path);
+        window.onpushState(state, title, path); 
+    }
+</script>
+</html>

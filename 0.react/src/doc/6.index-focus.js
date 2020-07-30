@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 class Form extends React.Component{
     constructor(props) {
         super(props);
+        console.log(React, 'React');
         this.textInput = React.createRef();
     }
     getFocus = () => {

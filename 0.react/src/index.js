@@ -5,9 +5,12 @@ class Form extends React.Component{
     constructor(props) {
         super(props);
         this.state={text:'hello'}
+        this.conRef = React.createRef();
+        console.log(this.conRef);
     }
     add = () => {
         console.log(this.state.text);
+        console.log(this.conRef, 'conref--');
     }
     handlchange = (event) => {
         this.setState({text:event.target.value});
@@ -23,6 +26,7 @@ class Form extends React.Component{
             <input value={this.state.text} onChange={this.handlchange}/>
             <Son text={this.state.text} name={this.props.name} changeText={this.changeText}/>
             <button onClick={this.add}>add</button>
+            <input type="text" ref={this.conRef}/>
             </>
         )
     }
