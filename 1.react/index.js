@@ -7,7 +7,7 @@ class Transaction {
     }
     perform(anyMethod) {
         this.wrappers.forEach(wrapper => wrapper.initialize());
-        anyMethod.call();
+        anyMethod.call();//在这个方法执行前后做一些事情
         this.wrappers.forEach(wrapper => wrapper.close());
     }
 }
@@ -16,20 +16,19 @@ let batchingStrategy = {
     dirtyComponents: [], //脏组件 --- 组件的状态和界面显示的不一样
     batchedUpdates() {
         this.dirtyComponents.forEach(component => {
-            console.log(component, 'dirtyComponents');
             component.updateComponent()
         })
     }
 
 }
+//更新器
 class updater {
     constructor(component) {
-        this.component = component;
-        this.pendingStates = []; //暂存临时状态
+        this.component = component;//组件
+        this.pendingStates = []; //暂存临时状态 缓存起来
     }
     addState(partcialState) {
         this.pendingStates.push(partcialState);
-        console.log(this, 'addstate--this');
         //dirtyComponents 脏组件 --- 组件的状态和界面显示的不一样
         batchingStrategy.isBatchingUpdates ? 
         batchingStrategy.dirtyComponents.push(this.component):
@@ -37,7 +36,7 @@ class updater {
     }
 }
 
-//父类
+//父类 可以复用的逻辑
 class Component{
     constructor(props){
         this.props = props;
@@ -55,16 +54,18 @@ class Component{
         oldElement.parentElement.replaceChild(newElement,oldElement);
     }
     // 把一个Dom模板字符创转换成真实dom
-    createDOMfromDOMString() {
-        let htmlString = this.render();
+    fcreateDOMfromDOMString() {
+        let htmlString = this.render();//父类调用子类的方法 创建的是子类的实例new Counter()
         // this.domElement = this.createDomFromDomString(htmlString);
         let div = document.createElement('div');
         div.innerHTML = htmlString;
-        this.domElement = div.children[0];
+        this.domElement = div.children[0]; // button的实例
         this.domElement.component = this;// this  当前counter组件实例
         // this.domElement.addEventListener('click', this.add.bind(this))
         return this.domElement;
     }
+    // 用法 ：1.let countApp = document.getElementById('counter-app');
+   // 2.new Counter({name:'珠峰架构'}).mount(countApp);
     mount(containter) {
         containter.appendChild(this.createDOMfromDOMString());
     }
@@ -92,7 +93,7 @@ let transaction = new Transaction([{
 //事件委托 react也是通过事件委托方法实现
 window.trigger = function(event, method, ...others) {
     console.log(event, method);
-    let component = event.target.component;
+    let component = event.target.component;//拿到counter组件实例
     // component[method].call(event.target.component, event, method, ...others);
     transaction.perform(component[method].bind(component));
 }
@@ -117,6 +118,7 @@ class Counter extends Component{
         })
         // this.state({number: this.state.number+1})
     }
+    //只管渲染 让代码更纯粹
     render() {
         return `<button id="counter-app" onClick="trigger(event, 'add')">${this.props.name}${this.state.number}</button>`
     }

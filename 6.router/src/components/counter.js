@@ -18,7 +18,7 @@ class Counter extends Component {
 }
 export default connect(
     state => {
-        console.log(state)
+        console.log(state, 'state')
         return state.counter;
     },
     actions

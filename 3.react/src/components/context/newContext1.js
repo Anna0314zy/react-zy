@@ -88,22 +88,20 @@ function Title(props) {
     )
        
 }
-// class Content extends Component {
-//     static contextType = ThemeContext;
-//     render() {
-//     // this.context = Title.contextType.Provider.value; //手写的才需要写这个
+class Content extends Component {
+    static contextType = ThemeContext;
+    render() {
+        console.log(this.context);
+        return (
+            <div style={{ border: '2px solid blue', padding: '5px', color: this.context.color }}>
+                content
+                <button onClick={() => this.context.setColor('red')}>变红</button>
+                <button onClick={() => this.context.setColor('green')}>变绿</button>
 
-//         console.log(this.context);
-//         return (
-//             <div style={{ border: '2px solid blue', padding: '5px', color: this.context.color }}>
-//                 content
-//                 <button onClick={() => this.context.setColor('red')}>变红</button>
-//                 <button onClick={() => this.context.setColor('green')}>变绿</button>
-
-//             </div>
-//         )
-//     }
-// }
+            </div>
+        )
+    }
+}
 function Content() {
    return(
     <ThemeContext.Consumer>

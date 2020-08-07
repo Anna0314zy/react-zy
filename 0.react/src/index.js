@@ -1,45 +1,83 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// ref 只能引用类组件 不能引用函数式组件
-class Form extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state={text:'hello'}
-        this.conRef = React.createRef();
-        console.log(this.conRef);
-    }
-    add = () => {
-        console.log(this.state.text);
-        console.log(this.conRef, 'conref--');
-    }
-    handlchange = (event) => {
-        this.setState({text:event.target.value});
-    }
-    //给子组件传方法  子组件调用给父组件传值
-    changeText = (text) => {
-        console.log(text, 'text')
-        this.setState({text});
-    }
-    render() {
-        return (
-            <>
-            <input value={this.state.text} onChange={this.handlchange}/>
-            <Son text={this.state.text} name={this.props.name} changeText={this.changeText}/>
-            <button onClick={this.add}>add</button>
-            <input type="text" ref={this.conRef}/>
-            </>
-        )
-    }
+import React from './react';
+import ReactDOM from './react-dom';
+// import './index.css';
+// import App from './App';
+// import * as serviceWorker from './serviceWorker';
+// let style = { color: 'red' };
+// let name = '珠峰架构';
+// function getName() {
+//   return '珠峰架构';
+// }
+/**
+ * JSX 要想使用一个变量 必须放在{}里
+ * 表达式就是变量跟运算符的组合
+ */
+// ReactDOM.render(
+// <h1
+//   id="mytitle"
+//   className="mytitle"
+//   style={style}>
+//     hello {getName()}
+// </h1>,
+//   // <React.StrictMode>
+//   //   <App />
+//   // </React.StrictMode>,
+//   document.getElementById('root')
+// );
+// let element = React.createElement('h1', {
+
+//   className: "mytitle"
+// }, 'hello', React.createElement('span', null, 'world'));
+// console.log(JSON.stringify(ele));
+/**
+ * React就是一个普通的js对象
+ *  {
+  "type":"h1",
+  "key":null,
+  "ref":null,
+  "props":{
+      "className":"mytitle",
+      "children":[
+          "hello",
+          {
+              "type":"span",
+              "key":null,
+              "ref":null,
+              "props":{
+                  "children":"world"
+              },
+              "_owner":null,
+              "_store":{
+
+              }
+          }
+      ]
+  },
+  "_owner":null,
+  "_store":{
+
+  }
 }
-class Son extends React.Component{
-   render() {
-    return (
-        <>
-        <div>text:{this.props.text}</div> 
-        <input ref="myInput"></input>
-        <button onClick={()=>this.props.changeText(this.refs.myInput.value)}>改变状态</button>
-        </>
-    )
-   }
+ */
+function Welcome(props) {
+  return React.createElement('h1', {}, props.name, props.age)
 }
-ReactDOM.render(<Form/>, document.getElementById('root'));
+// let element = React.createElement(Welcome, {name:'zhufeng', age:10});
+class Welcome1 extends React.Component {
+  render() {
+    return React.createElement('h1', {}, props.name, props.age)
+  }
+}
+// console.log('element---', element);
+ReactDOM.render(
+  element,
+  // <React.StrictMode>
+  //   <App />,
+  // </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+// serviceWorker.unregister();

@@ -60,7 +60,6 @@ class Sum1 extends React.Component {
 class Sum2 extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {date:new Date().toLocaleDateString()};
     this.numA = React.createRef();//把真实dom给了current
     this.numB = React.createRef();
     this.result = React.createRef();

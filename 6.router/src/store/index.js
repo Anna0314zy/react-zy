@@ -3,8 +3,8 @@ import reducers from './reducers'
 import {routerMiddleware} from '../connected-react-router'; //中间件
 import history from './history'
 //知识点 数据持久化
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { persistStore, persistReducer } from '../redux-persist'
+import storage from '../redux-persist/lib/storage' // defaults to localStorage for web
 
 
 const persistConfig = {
