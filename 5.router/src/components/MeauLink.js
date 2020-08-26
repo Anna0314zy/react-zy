@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link } from '../react-router-dom';
 // 如果当前地址栏的路径跟自己匹配的话 加一个背景色
 //在Route要想渲染指定内容有三种方式 component render children
 // component render 路径匹配时渲染

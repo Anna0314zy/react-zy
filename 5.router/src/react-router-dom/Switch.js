@@ -11,7 +11,6 @@ export default class Switch extends Component {
         
         for(let i = 0; i < children.length;i++) {
             let child = children[i];
-            console.log(child,'--');
             let {path='/', exact=false} = child.props;
             let paramNames = [];
             let regexp = pathToRegexp(path, paramNames,{end:exact});

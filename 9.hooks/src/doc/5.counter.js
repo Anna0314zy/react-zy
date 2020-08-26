@@ -5,7 +5,7 @@ function Child(props, parentRef) {
   let inputRef = useRef();
   useImperativeHandle(parentRef, () => {
     return {
-      focus() {
+      focus() { //这个方法会传给parentRef。current
         inputRef.current.focus();
       }
     }

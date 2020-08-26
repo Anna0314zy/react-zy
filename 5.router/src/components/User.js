@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Link ,Redirect,Switch} from 'react-router-dom'
+import { Route, Link ,Redirect,Switch} from '../react-router-dom'
 import UserList from './UserList'
 import UserAdd from './UserAdd'
 import UserDetail from './userDetail'
@@ -16,7 +16,7 @@ export default class User extends Component {
                     </ul>
                 </div>
                 <div className="col-md-10">
-                    {/* switch 匹配只会匹配一个 */}
+                    {/* switch 匹配只会匹配一个 匹配上了就不再向下匹配了 */}
                     <Switch>
                     <Route path="/user/list" component={UserList}></Route>
                     <Route path="/user/add" component={UserAdd}></Route>

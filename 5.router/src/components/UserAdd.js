@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Redirect } from '../react-router-dom';
 import local from '../local'
-import {Prompt} from 'react-router-dom'
+import {Prompt} from '../react-router-dom'
 export default class UserAdd extends Component {
     state = {blocking: false} //默认不阻止
     constructor(props) {

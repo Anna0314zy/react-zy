@@ -12,20 +12,5 @@ export default function({dispatch,getState}) {
             //必须return 一个失败
             return Promise.reject(error);
         }): next(action);
-    //     promiseIncrement() {
-    //         return {
-    //             type: types.INCREMENT,
-    //             payload: new Promise((reslove, reject) => {
-    //                 setTimeout(() => {
-    //                     let result = Math.random();
-    //                     if (result > .5) {
-    //                         reslove(result);
-    //                     } else {
-    //                         reject(result);
-    //                     }
-    //                 }, 1000)
-    //             })
-    //         }
-    //     }
     }
 }

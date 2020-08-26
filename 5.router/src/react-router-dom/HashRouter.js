@@ -7,7 +7,7 @@ export default class HashRouter extends Component {
     componentDidMount() {
         window.location.hash = window.location.hash || '/';
         window.addEventListener('hashchange', (e) => {
-            console.log(e);
+            //location对象  里有的参数
             this.setState({
                 location: {
                     ...this.state.location,
@@ -20,6 +20,7 @@ export default class HashRouter extends Component {
     locationState = null;//私有属性
     render() {
         let that =this;
+        //传给route
         let value = {
             location:that.state.location,
             history:{

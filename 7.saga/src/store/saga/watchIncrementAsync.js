@@ -23,7 +23,7 @@ export function* watchIncrementAsync() {
     }
     alert('最多执行3次')
 }
-export default function* rootSaga() {
+export default function* () {
     //tabkeEvery 是take的语法糖
     yield all([
         watchAndLog(),//监听每个动作，当动作发生的时候打印日志

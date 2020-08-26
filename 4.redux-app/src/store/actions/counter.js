@@ -7,7 +7,7 @@ const actions = {
     decrement() {
         // store.dispatch({ type: DECREMENT })
         return { type: types.DECREMENT };
-    },
+    }, 
     //thunk.js
     //延迟一秒加1
     asyncIncrement() {

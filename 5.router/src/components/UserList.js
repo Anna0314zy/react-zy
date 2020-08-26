@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import local from '../local'
-import {Link} from 'react-router-dom'
+import {Link} from '../react-router-dom'
 export default class UserList extends Component {
     state = {users:[]}
     componentDidMount() {

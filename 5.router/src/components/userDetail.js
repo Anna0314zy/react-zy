@@ -5,6 +5,7 @@ export default class userDetail extends Component {
     state = { user: {} };
     componentDidMount() {
         let user = this.props.location.state;
+        console.log(this.props, 'props');
         if (!user) {
            let id = this.props.match.params.id;
             user = local.get(id);

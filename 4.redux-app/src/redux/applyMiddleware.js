@@ -2,7 +2,7 @@ import compose from './compose'
 export default function applyMiddleware(...middleware) {
     return function(createStore) {
         return function(reducers) {
-            const store = createStore(reducers);
+            const store = createStore(reducers);//最原始 的仓库
             let dispatch = () => {
                 throw Error('现在还不能用');
             }

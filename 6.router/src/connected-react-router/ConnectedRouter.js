@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Router} from 'react-router'
+import {Router} from 'react-router'//react-router-dom是浏览器端的router
 import {LOCATION_CHANGE} from './constants'
 import { ReactReduxContext } from 'react-redux'
 //react-router-dom 是浏览器端的Router

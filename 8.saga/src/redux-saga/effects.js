@@ -2,14 +2,14 @@
 
 
 export function take(actionType) {
-    console.log('effect-take', actionType);
+    // console.log('effect-take', actionType);
     return {
         type:'TAKE',
         actionType
     }
 }
 export function put(action) {
-    console.log('effect-put', action);
+    // console.log('effect-put', action);
     return {
         type:'PUT',
         action
@@ -22,10 +22,10 @@ export function fork(task) {
     }
 }
 //takeevery 相当于要开启一个新的子进程，单独监听actionType,当动作发生的时候去执行迭代器
-export function* takeEvery(actioType,generator) {
+export function* takeEvery(actionType,generator) {
     yield fork(function*() {
         while(true) {
-            yield take(actioType);
+            yield take(actionType);
             yield generator();//increment
         }
     })

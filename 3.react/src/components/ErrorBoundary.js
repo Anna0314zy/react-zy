@@ -15,14 +15,14 @@ class ErrorBoundary extends Component {
             hasErrors:true
         }
     }
-    // //捕获错误和信息
-    // componentDidCatch(err, info) {
-    //    if (err) {
-    //     this.setState({
-    //         hasErrors: true
-    //     })
-    //    }
-    // }
+    //捕获错误和信息
+    componentDidCatch(err, info) {
+       if (err) {
+        this.setState({
+            hasErrors: true
+        })
+       }
+    }
     render() {
         if (this.state.hasErrors) {
             return <div style={{ border: '1px solid green'}}> 此组件发生未知错误，无法正常显示</div>
@@ -36,18 +36,5 @@ function Clock() {
 function Counter() {
     return <div style={{ border: '1px solid pink'}}>计数器</div>
 }
-class Page extends Component {
-    render() {
-        return (
-            <div style={{ border: '1px solid red', padding: '5px' }}>
-                page
-                <ErrorBoundary>
-                    <Clock></Clock>
-                </ErrorBoundary>
-            <Counter/>
-            </div>
-
-        )
-    }
-}
+ 
 export default Page;

@@ -5,10 +5,11 @@ import autoSaga from './Aotosaga'
 
 export default function* rootsage() {
     //立刻启动所有的generator 等全部完成后saga才算完成
+
     yield all([
         counterSaga(),
-        logSaga(),
-        autoSaga()
+        logSaga()
+        // autoSaga()
     ])
-    console.log('logersaga结束了')
+    console.log('index-saga结束了')
 }

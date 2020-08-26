@@ -22,8 +22,8 @@ import Page from './components/ErrorBoundary'
 // }
 ReactDOM.render(
   <>
-  {/* <MouseTracker render={(props) => <Picture {...props}></Picture>}>
-  </MouseTracker> */}
+  <MouseTracker render={(props) => <Picture {...props}></Picture>}>
+  </MouseTracker>
   <Page/>
   </>,
   document.getElementById('root')

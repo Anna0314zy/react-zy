@@ -39,5 +39,23 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    
   </body>
+  <script>
+    // var nodeList = document.getElementsByTagName('*');
+    let arr = [];
+    let findTagName = (nodeList) => {
+      if (nodeList.nodeType === 1) {
+        arr.push(nodeList.tagName);
+      }
+      let children = nodeList.childNodes;
+      if (children && children.length > 0) {
+        Array.from(children,  child=> findTagName(child))
+      }
+    }
+    findTagName(document);
+    arr = [...new Set(arr)]
+    console.log(arr)
+    
+  </script>
 </html>

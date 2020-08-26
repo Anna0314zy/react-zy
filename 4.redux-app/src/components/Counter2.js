@@ -8,8 +8,6 @@ import actions from '../store/actions/counter2'
 // let DECREMENT = 'DECREMENT';
 //在redux中 动作是有规定的 规定必须有一个不为undefined type属性 用来表示动作类型
 
-
-
 let boundActions = bindActionCreators(actions, store.dispatch);
 export default class  extends Component {
     constructor() {

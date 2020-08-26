@@ -31,7 +31,7 @@ export function* incrementAsync() {
     //系统的delay 内部调用了call方法
     let obj = {username:'zhufeng'}; //让delay 的this指向obj
     let msg = yield call([obj,delay], 1000);
-    //let msg = yield apply(obj,delay, 1000); //另一种写法
+    //let msg = yield apply(obj,delay, [1000]); //另一种写法
     // let msg = yield call(delay, 100); //call就是调用一个函数
     console.log('msg', msg);
     yield put({type:types.INCREMENT})
@@ -47,11 +47,6 @@ export default function* rootsage() {
         hellosaga(),
         watchIncrementAsync()
     ])
-    // {
-    //     type:'All',
-    //     payload: [hellosaga, watchIncrementAsync]
-    // }
-    console.log('next');
 }
 // ES6中定义了一种新的函数.用function*定义生成器函数,
 // 这种函数会返回一个generator对象

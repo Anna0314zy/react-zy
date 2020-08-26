@@ -1,29 +1,48 @@
-import React, { useLayoutEffect, useEffect, useState} from 'react';
+import React, {createRef, forwardRef,useRef, useState, useEffect, useReducer, createContext, Component, useContext,useImperativeHandle } from 'react';
 import ReactDOM from 'react-dom';
-//自定义hook 复用状态逻辑 复用的不是状态本身 只能用于函数式组件
-//只要一个方法 方法名的前缀是use开头 并且在函数内使用了hooks 那么他就是一个自定义hook
-function useNumber() {
+let myInput;
+// function Child() {
+//   const inputRef = useRef();//useRef 和 createRef 的区别  前者是旧的永远是一个  后者是新的 每次都创建新的
+//   console.log('inputRef === myInput', inputRef === myInput)
+//   myInput = inputRef;
+//   function getFocus() {
+//     inputRef.current.focus();
+//   }
+//   return (
+//     <>
+//     <input type="text" ref={inputRef}/>
+//     <button onClick={getFocus}>获得焦点</button>
+//     </>
+//   )
+
+// }
+function Child(props, ref) {
+  //函数式组件不能this.inputRefs.current.
+  return (
+    <>
+    <input type="text" ref={ref}/>
+    </>
+  )
+}
+let ForwardChild = forwardRef(Child);
+
+function Parent() {
+  //操作child 的input 
   let [number, setNumber] = useState(0);
-  useEffect(() => {
-    setInterval(() =>{
-      setNumber(number => number+1)
-    },1000);
-  },[])
-  return [number, setNumber];
+  const inputRef = useRef();
+  function getFocus() {
+    inputRef.current.focus();
+  }
+  return (
+    <>
+    <ForwardChild ref={inputRef}/>
+    <button onClick={getFocus}>获得焦点</button>
+    <button onClick={()=>setNumber(number+1)}>{number}</button>
+    </>
+  )
 }
-function Counter1() {
-  let [number, setNumber] = useNumber();
-return <div><button onClick={()=>setNumber(number+1)}> {number}</button></div>
-}
-function Counter2() {
-  let[number, setNumber] = useNumber();
-return <div>{number}</div>
-}
+
 ReactDOM.render(
-  <>
-  <Counter1/>
-  <Counter2/>
-  </>,
+  <Parent/>,
   document.getElementById('root')
 );
-

@@ -15,7 +15,7 @@ class Counter extends Component {
   }
 }
 function Counter2() {
-  let [number, setNumber] = useState(0);
+  let [number, setNumber] = useState(0);//0是初始值
   return (
     <>
       <p>{number}</p>
@@ -26,9 +26,10 @@ function Counter2() {
 //每次渲染都是独立的闭包
 function Counter3() {
   let [number, setNumber] = useState(0);
+  //点2下左边 点2下右边  
   function alertNumber() {
     setTimeout(() => {
-      alert(number)
+      alert(number) //2 值是独立的
     }, 3000)
   }
   return (
@@ -42,10 +43,11 @@ function Counter3() {
 function Counter4() {
   let [number, setNumber] = useState(0);
   // console.log(useState(0));
+  //左边2次右边2次左边1次
   function lazy() {
     setTimeout(() => {
-      // setNumber(number+1)
-      setNumber(number => number + 1)
+      // setNumber(number+1) ==> 3
+      setNumber(number => number + 1) // ===> 5 这个会去最新的状态
     }, 3000)
   }
   return (
@@ -86,6 +88,7 @@ function Counter6(props) {
   console.log('Counter6-render')
   const [number, setNumber] = useState(0);
   const [name, setName] = useState('计数器');
+  // const data = {number};
   const data = useMemo(() => ({ number }), [number]); // []这个是依赖项 如果这个依赖项
   const addClick = useCallback(()=>{
     setNumber(number + 1)

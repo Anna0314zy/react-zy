@@ -16,7 +16,7 @@ export default function createStore(reducer, preloadedState) {
             throw new Error('action必须是一个纯对象')
         }
         if (typeof action.type === 'undefined') {
-            throw new Error('action的type的属性不能是undefined');
+            throw new  Error('action的type的属性不能是undefined');
         }
         currentState = currentReducer(currentState, action);
         //状态发生变化  通知
@@ -40,7 +40,7 @@ export default function createStore(reducer, preloadedState) {
         }
     }
     //如果state是通过reducer传过来的  没法拿到初始化状态 必须做以下处理
-    dispatch({type:actionTypes});
+    dispatch({type:actionTypes});//preloadedState 可能没有传
     return {
         getState,
         subscribe,
