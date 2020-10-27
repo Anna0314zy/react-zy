@@ -3319,15 +3319,15 @@ let obj ={
 
 ### useState
 
-![hooks1](/Users/zouyu/Desktop/react-zy/img/hooks1.png)
+![hooks1](/Users/liangyuan/Desktop/react-zy/img/hooks1.png)
 
-![hook2](/Users/zouyu/Desktop/react-zy/img/hook2.png)
+![hook2](/Users/liangyuan/Desktop/react-zy/img/hook2.png)
 
 
 
 #### 1.1每次渲染都是独立的闭包
 
-![hook3](/Users/zouyu/Desktop/react-zy/img/hook3.png)
+![hook3](/Users/liangyuan/Desktop/react-zy/img/hook3.png)
 
 ```js
 function Counter2() {
