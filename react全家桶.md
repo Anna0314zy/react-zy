@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ./img
+---
+
 [TOC]
 
 ## react基础用法
@@ -239,7 +243,7 @@ class Counter extends Component{
 
 #### setState的内部实现
 
-<img src="/Users/zouyu/Desktop/react-zy/img/setSTtae.png" style="zoom:50%;" />
+<img src="./img/setSTtae.png" style="zoom:50%;" />
 
 ```js
 首先看是不是批量更新 
@@ -346,9 +350,9 @@ let ele = React.createElement('h1', { className: "mytitle"
 
 ```
 
-<img src="/Users/zouyu/Desktop/react-zy/img/WX20200805-102157@2x.png" style="zoom:50%; text-align:left" />
+<img src="./img/WX20200805-102157@2x.png" style="zoom:50%; text-align:left" />
 
-<img src="/Users/zouyu/Desktop/react-zy/img/WX20200805-102711@2x.png" style="zoom:50%;" />
+<img src="./img/WX20200805-102711@2x.png" style="zoom:50%;" />
 
 ```js
 react.js
@@ -451,7 +455,7 @@ export default {
 
 #### 旧版生命周期
 
-![](/Users/zouyu/Desktop/react-zy/img/WX20200806-215207@2x.png)
+![](./img/WX20200806-215207@2x.png)
 
 ```js
 //渲染过程中react 16 后可能会执行多次 不建议请求接口操作
@@ -489,7 +493,7 @@ export default {
 
 #### 新版生命周期react16
 
-![](/Users/zouyu/Desktop/react-zy/img/生命周期新.png)
+![](./img/生命周期新.png)
 
 ```js
 废弃 componentWillMount  componentWillReceiveProps componentWillUpdate
@@ -1187,9 +1191,9 @@ class ErrorBoundary extends React.Component {
 
 action.type !== 'undefined'
 
-![redux](/Users/zouyu/Desktop/react-zy/img/redux.png)
+![redux](./img/redux.png)
 
-![redux2](/Users/zouyu/Desktop/react-zy/img/redux2.png)
+![redux2](./img/redux2.png)
 
 ```js
 index.js
@@ -2490,7 +2494,7 @@ export default class ConnectedRouter extends Component {
 
 把路由存到redux中
 
-<img src="/Users/zouyu/Desktop/react-zy/img/connect-router.png" alt="connect-router" style="zoom:50%;" />
+<img src="./img/connect-router.png" alt="connect-router" style="zoom:50%;" />
 
 ```js
 import { LOCATION_CHANGE } from './constants'
@@ -2699,13 +2703,13 @@ export default {
 
 ### 1.saga介绍
 
-![redux-saga](/Users/zouyu/Desktop/react-zy/img/redux-saga.png)
+![redux-saga](./img/redux-saga.png)
 
-![redux-saga2](/Users/zouyu/Desktop/react-zy/img/redux-saga2.png)
+![redux-saga2](./img/redux-saga2.png)
 
 ### 2.effect
 
-![saga-effects](/Users/zouyu/Desktop/react-zy/img/saga-effects.png)
+![saga-effects](./img/saga-effects.png)
 
 
 
@@ -3019,7 +3023,7 @@ export default function* () {
 
 ### fork
 
-![fork](/Users/zouyu/Desktop/react-zy/img/fork.png)
+![fork](./img/fork.png)
 
 ```js
 
@@ -3445,7 +3449,7 @@ function Counter6(props) {
 
 ### useReducer
 
-![use-reducer](/Users/zouyu/Desktop/react-zy/img/use-reducer.png)
+![use-reducer](./img/use-reducer.png)
 
 ```js
 const initialState = 0;
@@ -3469,7 +3473,7 @@ function Counter() {
 
 ### useContext
 
-![use-conext](/Users/zouyu/Desktop/react-zy/img/use-conext.png)
+![use-conext](./img/use-conext.png)
 
 ```js
 import React, { useReducer, createContext, Component, useContext } from 'react';
@@ -3499,7 +3503,7 @@ function Subcounter() {
 
 ### useEffect
 
-![react-effect](/Users/zouyu/Desktop/react-zy/img/react-effect.png)
+![react-effect](./img/react-effect.png)
 
 ```js
 function Counter() {
@@ -3520,7 +3524,7 @@ function Counter() {
 
 清除副作用
 
-![react-effect2](/Users/zouyu/Desktop/react-zy/img/react-effect2.png)
+![react-effect2](./img/react-effect2.png)
 
 ```js
 定时器案例
@@ -3676,9 +3680,9 @@ ReactDOM.render(
 
 ### UseLayoutEffectComponent
 
-![](/Users/zouyu/Desktop/react-zy/img/layout.png)
+![](./img/layout.png)
 
-![](/Users/zouyu/Desktop/react-zy/img/uselatout.png)
+![](./img/uselatout.png)
 
 ```js
 import React, { useLayoutEffect, useEffect, useState} from 'react';
@@ -3719,6 +3723,238 @@ ReactDOM.render(
 );
 
 ```
+
+## 骨架屏
+
+客户端请求服务端 会有一些占位 不至于白屏
+
+![image-20201117165916590](./img/image-20201117165916590.png)
+
+![image-20201117170039243](./img/image-20201117170039243.png)
+
+
+
+
+
+1.Skeleton.js   npx webpack --config Webpack.skeleton.js
+
+Webpack-skeleton.js 将以这个文件作为入口文件
+
+```js
+Skeleton.js - Webpack.skeleton.js 入口文件
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ContentLoader from 'react-content-loader'
+import ReactDomServer from 'react-dom/server'
+//把一个组件渲染成一个静态的html字符串 ContentLoader是一个svg
+let  html = ReactDomServer.renderToStaticMarkup(<ContentLoader />);
+export default html;
+
+html就是一个svg图片
+```
+
+2.index.js webpack-dev-server 入口
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+// import ContentLoader from 'react-content-loader'
+let style = {
+    width: '800px',
+    height: '800px',
+    background: 'red'
+}
+
+setTimeout(() => {
+    console.log(document.getElementById('root'))
+    ReactDOM.render(<h1 style={style}>hello world</h1>, document.getElementById('root'))
+
+}, 1000)
+
+```
+
+3.webpack.config.js
+
+打包客户端的时候 用插件SkeletonWebpackPlugin
+
+调用html-webpack-plugin 钩子方法 在构建dom之前把占位图放上去
+
+```js
+
+插件SkeletonWebpackPlugin
+```
+
+![image-20201117185332565](./img/image-20201117185332565.png)
+
+```js
+手写一个插件
+
+let webpack = require('webpack');
+let MFS = require('memory-fs');//内存版的fs模块
+let requireFromString = require('require-from-string')
+//let result = requireFromString('module-exports = 'hello');
+//reslut = 'hello'
+let mfs = new MFS();
+let path = require('path')
+class SkeletonWebpackPlugin {
+    constructor(options) {
+        this.options = options;
+    }
+
+    apply(compiler) {
+        let {webpackConfig} = this.options;
+        // 将插件注册到compilation钩子
+        // tap(触及) 到 compilation hook，而在 callback 回调时，会将 compilation 对象作为参数，
+        compiler.hooks.compilation.tap('SkeletonWebpackPlugin', compilation => {
+            console.log('The compiler is starting a new compilation...');
+            //我们在这监听 webpack-html-plugin创建模本 在处理之前 把页面换掉
+            //tapAsync 异步监听事件
+            // BeforeHtmlProcessing html-webpack-plugin的一个钩子函数
+            // 现在，通过 compilation 对象，我们可以 tap(触及) 到各种可用的 hooks 了
+            console.log(compilation.hooks, 'compilation.hooks')
+            //监听html处理事件
+            compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('SkeletonWebpackPlugin', (htmlPluginData, callbak) => {
+                // htmlPluginData.html 读到的html文件
+                // 我在这个地方要开启一次新的编译
+                console.log('html-webpack-plugin编译dom之前')
+                let childCompiler = webpack(webpackConfig);
+                //子编译放到内存里 outputFileSystem 指定编译后用什么模块输出
+                childCompiler.outputFileSystem = mfs;
+                let outPutPath = path.join(webpackConfig.output.path, webpackConfig.output.filename)
+                console.log(outPutPath);
+                childCompiler.run((err,data) => {
+                    //以同步的方式读取文件内容
+                    console.log('开始新的编译')
+                     let skeletonJs = mfs.readFileSync(outPutPath,'utf8')
+                    let result = requireFromString(skeletonJs);
+                     let svg = result.default;
+                    htmlPluginData.html = htmlPluginData.html.replace('<div id="root"></div>', `<div id="root">${svg}</$div>`)
+                    callbak(null, htmlPluginData);
+                })
+            })
+        })
+    }
+
+}
+module.exports = SkeletonWebpackPlugin
+```
+
+
+
+create-content-loader 占位动画 npm.js!
+
+服务端
+
+写个webpack配置
+
+2.Webpack.skeleton.js
+
+```js
+//拿到占位图
+// webpack.dev.js
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const base = require('./webpack.base');
+const {merge} = require('webpack-merge');
+const config = merge(base, {
+    mode: 'development',
+    // 输出目录
+    // 开发环境下并不会产生 dist 到磁盘目录 而是存储在内存中
+    entry: './src/skeleton.js',
+    target: 'node', //要给node 使用 let fs =
+    output:{
+        filename: 'skeleton.js',
+        libraryTarget: 'commonjs2' //最终把这个文件的导出结果 放到module.exports上 node规范
+    },
+    plugins: [
+
+    ],
+})
+
+module.exports = config
+
+```
+
+写个插件 编译的时候生成一个展位图 内嵌到root div下
+
+## 长列表优化
+
+
+
+![image-20201118140901814](./img/image-20201118140901814.png)
+
+尽量减少dom的数量   react-window.js  去官网看看原理用法等
+
+![image-20201120165213312](./img/image-20201120165213312.png)
+
+原理
+
+```js
+{/*<List*/}
+{/*    height={150}*/}
+{/*    itemSize={30}*/}
+{/*    itemCount={100}*/}
+{/*    width={'100%'}*/}
+{/*>*/}
+{/*    {Row}*/}
+{/*</List>*/}
+export class FixedSizeList extends React.Component{
+    state = {start:0};//起始索引
+    constructor() {
+        super();
+        this.containerRef = React.createRef();
+    }
+    componentDidMount() {
+       this.containerRef.current.addEventListener('scroll', () => {
+           let scrollTop = this.containerRef.current.scrollTop;
+           let start = Math.floor(scrollTop / this.props.itemSize);//
+           this.setState({start})
+       })
+    }
+
+    render() {
+        let {width, height, itemSize, itemCount} = this.props;
+
+        let children = [];
+        let pageSize = Math.floor(height / itemSize) + 1;//多显示一条
+        let itemStyle = {height:itemSize, width: '100%', position:'absolute', left: 0, top: 0}
+        for(let i = this.state.start; i < this.state.start + pageSize; i++) {
+
+            let style = {...itemStyle, top: i * itemSize}
+            children.push(this.props.children({index: i, style}))
+        }
+        let containerStyle = {width,height, position:'relative', overflow: 'auto'};
+        return (
+            <div style={containerStyle} ref={this.containerRef}>
+                <div style={{width:'100%', height: itemSize*itemCount}}>
+                    {children}
+                </div>
+            </div>
+        )
+
+    }
+}
+```
+
+## 预渲染
+
+![image-20201118140621205](./img/image-20201118140621205.png)
+
+![image-20201118140658366](./img/image-20201118140658366.png)
+
+
+
+## 图片懒加载
+
+react-lazyLoad.js
+
+## key的优化
+
+## react性能分析器
+
+React-flame-graph
+
+## ![image-20201118162503846](./img/image-20201118162503846.png)
 
 
 
