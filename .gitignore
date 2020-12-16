@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-node_modules/*
+*/node_modules/*
 #忽略目录 fd1 下的全部内容；注意，不管是根目录下的 /fd1/ 目录，还是某个子目录 /child/fd1/ 目录，都会被忽略；
 /.pnp
 .pnp.js

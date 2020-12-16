@@ -542,11 +542,6 @@ UNSAFE_componentWillReceiveProps(nextProps):
 1.参数是组件接收到的新的 props , 用于比对新的 props 和原有的 props, 用户需要在函数体中调用 setState() 来更新组件的数据.
 2.static getDerivedStateFromProps(nextProps, currentState):
 参数是组件接收到的新的 props 和组件当前的数据. 用户需要在这个函数中返回一个对象, 它将作为 setState() 中的 Updater 更新组件.
-
-作者：Apolo_Du
-链接：https://www.jianshu.com/p/cafe8162b4a8
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
 
 ```bash
@@ -854,7 +849,12 @@ function Title(props) {
 }
 ```
 
+### 生命周期 static getDerivedStateFromProps
+
+每当接受新的属性的时候 都会执行这个方法
+
 ```js
+n
 上下文模拟 忽略
 var REACT_CONTEXT_TYPE = Symbol.for('react.context');
 var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
@@ -869,9 +869,9 @@ function createContext() {
             this.state = {value:props.value}
         }
         //映射为新的状态对象
-       static getDerivedStateFromProps(props, state) {
-        Provider.value = props.value;
-            return {value:props.props}
+       static getDerivedStateFromProps(nextprops, prevstate) {
+        Provider.value = nextprop.value;
+            return prevstate
         }
         render() {
             return this.props.children;
@@ -1195,6 +1195,8 @@ action.type !== 'undefined'
 
 ![redux2](./img/redux2.png)
 
+![image-20201215232042276](/Users/zouyu/Desktop/react-zy/img/image-20201215232042276.png)
+
 ```js
 index.js
 export  {
@@ -1279,6 +1281,8 @@ export default function createStore(reducer, preloadedState) {
 
 #### bindActionCreator
 
+
+
 ```js
 function bindActionCreator(actionCreator, dispatch) {
     return function() {
@@ -1303,6 +1307,7 @@ function bindActionCreator(actionCreator, dispatch) {
 //      }
 //  }
 //  bindActionCreators的作用是将一个或多个action和dispatch组合起来生成
+
 ```
 
 #### combineReducers
@@ -1529,6 +1534,12 @@ ReactDOM.render((
 ```
 
 ### Redux-middleware
+
+![image-20201216105335959](/Users/zouyu/Desktop/react-zy/img/image-20201216105335959.png)
+
+![image-20201216111739770](/Users/zouyu/Desktop/react-zy/img/image-20201216111739770.png)
+
+![image-20201216111600314](/Users/zouyu/Desktop/react-zy/img/image-20201216111600314.png)
 
 ```js
 store --- index.js
@@ -3321,17 +3332,19 @@ let obj ={
 
 ## React-hooks
 
+![image-20201213224807493](/Users/zouyu/Desktop/react-zy/img/image-20201213224807493.png)
+
 ### useState
 
-![hooks1](/Users/liangyuan/Desktop/react-zy/img/hooks1.png)
+![hooks1](/Users/zouyu/Desktop/react-zy/img/hooks1.png)
 
-![hook2](/Users/liangyuan/Desktop/react-zy/img/hook2.png)
+![hook2](/Users/zouyu/Desktop/react-zy/img/hook2.png)
 
 
 
 #### 1.1每次渲染都是独立的闭包
 
-![hook3](/Users/liangyuan/Desktop/react-zy/img/hook3.png)
+![hook3](/Users/zouyu/Desktop/react-zy/img/hook3.png)
 
 ```js
 function Counter2() {
@@ -3447,6 +3460,10 @@ function Counter6(props) {
 }
 ```
 
+### 注意事项
+
+![image-20201213221349974](/Users/zouyu/Desktop/react-zy/img/image-20201213221349974.png)
+
 ### useReducer
 
 ![use-reducer](./img/use-reducer.png)
@@ -3470,6 +3487,12 @@ function Counter() {
   )
 }
 ```
+
+自定义useState
+
+![image-20201213222713342](/Users/zouyu/Desktop/react-zy/img/image-20201213222713342.png)
+
+
 
 ### useContext
 
@@ -3598,7 +3621,7 @@ funtion Parent() {
 ```
 
 ```js
-父组件去操作input框
+父组件去操作input框  破坏的封装的原则 危险
 function Child(props, ref) {
   return (
     <>
@@ -3723,6 +3746,42 @@ ReactDOM.render(
 );
 
 ```
+
+### 自定义hooks
+
+![image-20201213231054684](/Users/zouyu/Desktop/react-zy/img/image-20201213231054684.png)
+
+![image-20201213231148282](/Users/zouyu/Desktop/react-zy/img/image-20201213231148282.png)
+
+#### 2.uselogger
+
+![image-20201213231607458](/Users/zouyu/Desktop/react-zy/img/image-20201213231607458.png)
+
+
+
+#### 3.useThunk
+
+![image-20201213231935033](/Users/zouyu/Desktop/react-zy/img/image-20201213231935033.png)
+
+#### usePromise
+
+![image-20201213232024066](/Users/zouyu/Desktop/react-zy/img/image-20201213232024066.png)
+
+
+
+![image-20201213232309068](/Users/zouyu/Desktop/react-zy/img/image-20201213232309068.png)
+
+#### ajax
+
+![image-20201213232429599](/Users/zouyu/Desktop/react-zy/img/image-20201213232429599.png)
+
+![image-20201213232502381](/Users/zouyu/Desktop/react-zy/img/image-20201213232502381.png)
+
+
+
+
+
+
 
 ## 骨架屏
 
@@ -3961,6 +4020,28 @@ React-flame-graph
 ## 小知识点
 
 npm eject  能召唤出配置文件  ----> 实现css模块化
+
+# mock
+
+```js
+let Mock = require('mockjs');
+let result = Mock.mock({
+    "code":0,
+    "message":"成功",
+    "data|5":[{
+        "id":"@id",
+        "ip":"@ip",
+        "name":"@cname",
+        "userId":"@id",
+        "stars|2":["※"],
+        "avatar":"@image('200x100', '#894FC4', '#FFF', 'png', '!')",
+        "createAt":"@datetime"
+    }]
+});
+console.log(result);
+```
+
+
 
 ### 目录
 
