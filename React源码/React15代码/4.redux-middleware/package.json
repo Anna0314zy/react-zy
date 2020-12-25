@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.12.1",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.15",
     "react": "^16.8.6",

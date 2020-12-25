@@ -10,6 +10,7 @@ export default function(mapStateToProps,actions){
             static contextType = ReactReduxContext;
             constructor(props,context){
                 super(props);
+                console.log(context, 'context---');
                 //{counter1:{number:0},counter2:{number:0}}
                 this.state = mapStateToProps(context.store.getState());
                 if(typeof actions == 'function'){

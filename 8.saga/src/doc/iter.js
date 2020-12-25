@@ -49,5 +49,6 @@ function* gen() {
 console.log(gen[Symbol.iterator])
 let it2 = gen();//迭代器
 console.log(it2[Symbol.iterator])
+console.log(it2.next())
 
 

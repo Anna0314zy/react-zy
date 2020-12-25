@@ -10,6 +10,7 @@ export function* login(user){//user={name,pass}
     const token = yield call(Api.login,user);
     localStorage.setItem('loading',false);
     yield put({type:types.LOGIN_SUCCESS,payload:token});
+    // return token;
   }catch(error){
       alert(error);
      yield put({type:types.LOGIN_ERROR,payload:error})
@@ -23,7 +24,8 @@ export default function* watchLogin(){
   //这是为什么不用takeEvery,而要使用while(true)
   while(true){
     let action = yield take(types.LOGIN_REQUEST);
-    //const token = yield call(login,action.payload);
+    // const token = yield call(login,action.payload);
+    // console.log(token, 'token');
     //以fork开启一个新的进程的方式启动login方法，如果用fork的话不会阻塞当前的saga,当前的saga会立刻向下执行
     //如果是用fork执行的任务，返回一个代表当前任务的task对象
     const task = yield fork(login,action.payload);

@@ -15,7 +15,7 @@ export default function createSagaMiddleware() {
             if (observer[action.type]) {
                 //先删再绑定
                 console.log('publish');
-                let next = observer[action.type];//把下次订阅完成才结束
+                let next = observer[action.type];//上面存的就是next把下次订阅完成才结束
                 delete observer[action.type];
                 next(action);
                 // nexts.forEach(next => next(action));
@@ -32,6 +32,7 @@ export default function createSagaMiddleware() {
         }
     }
     let channel = createChannel();
+    //中间件
     function sagaMiddleware({ dispatch, getState }) {
 
         function run(generator, callback) {
@@ -74,7 +75,7 @@ export default function createSagaMiddleware() {
                                 //task = yield fork(increment); 会赋值给task
                                 break;
                             case 'CANCEL':
-                                effect.task.return('任务直接结束');
+                                effect.task.return('任务直接结束');//迭代器return
                                 break;
 
                             case 'CALL':
@@ -88,6 +89,7 @@ export default function createSagaMiddleware() {
                                 effect.fn(...effect.args, next);//把nextang
                                 break;
                             case 'ALL':
+                                //saga执行完之后 才执行next
                                 function times(cb, length) {
                                     let count = 0;
                                     return function () {

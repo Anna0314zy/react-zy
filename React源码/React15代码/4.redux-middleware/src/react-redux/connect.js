@@ -10,16 +10,17 @@ export default function(mapStateToProps,actions){
             static contextType = ReactReduxContext;
             constructor(props,context){
                 super(props);
+                console.log(this.context, context, '----context-------')
                 //{counter1:{number:0},counter2:{number:0}}
-                this.state = mapStateToProps(context.store.getState());
+                this.state = mapStateToProps(this.context.store.getState());
                 if(typeof actions == 'function'){
-                    this.boundActions = actions(context.store.dispatch,props);
+                    this.boundActions = actions(this.context.store.dispatch,props);
                 }else{
-                    this.boundActions = bindActionCreators(actions,context.store.dispatch);
+                    this.boundActions = bindActionCreators(actions,this.context.store.dispatch);
                 } 
             }
             shouldComponentUpdate(newProps,nextState){
-                if(this.state === mapStateToProps(context.store.getState())){
+                if(this.state === mapStateToProps(this.context.store.getState())){
                     return false;
                 }
                 return true;

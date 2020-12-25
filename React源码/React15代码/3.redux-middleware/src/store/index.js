@@ -9,7 +9,7 @@ const persistConfig = {
     key:'root',
     storage,
     //whitelist: ['counter'],
-    blacklist: ['counter1','counter2'],
+    // blacklist: ['counter1','counter2'],
 }
 let rootReducer = persistReducer(persistConfig,reducer);
 let store = applyMiddleware(promise,thunk,logger)(createStore)(rootReducer);

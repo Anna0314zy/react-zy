@@ -1281,7 +1281,29 @@ export default function createStore(reducer, preloadedState) {
 
 #### bindActionCreator
 
+action的创建者 负责返回一个action对象
 
+//  actionCreators = {
+//      increment() {
+//          return types.INCREMENT
+//      }
+//  }
+
+封装起来
+
+const add = () => {
+
+return {type: 'ADD'}
+
+}
+
+store.dispath({type: 'ADD'})
+
+store.dispath(add);
+
+现在我想直接调用 add 
+
+bindActionCreator(add, store.dispath) --- 让他去帮我调用dispath
 
 ```js
 function bindActionCreator(actionCreator, dispatch) {
@@ -1537,9 +1559,7 @@ ReactDOM.render((
 
 ![image-20201216105335959](/Users/zouyu/Desktop/react-zy/img/image-20201216105335959.png)
 
-![image-20201216111739770](/Users/zouyu/Desktop/react-zy/img/image-20201216111739770.png)
-
-![image-20201216111600314](/Users/zouyu/Desktop/react-zy/img/image-20201216111600314.png)
+![image-20201216134400752](/Users/zouyu/Desktop/react-zy/img/image-20201216134400752.png)
 
 ```js
 store --- index.js
@@ -2710,6 +2730,12 @@ export default {
 }
 ```
 
+### reselect
+
+![image-20201219183600394](/Users/zouyu/Desktop/react-zy/img/image-20201219183600394.png)
+
+
+
 ## redux-saga
 
 ### 1.saga介绍
@@ -3779,7 +3805,9 @@ ReactDOM.render(
 
 
 
+## dva
 
+![image-20201221225624299](/Users/zouyu/Desktop/react-zy/img/image-20201221225624299.png)
 
 
 
@@ -4067,3 +4095,11 @@ console.log(result);
 \NodeJS开发经验者优先。
 
 熟悉http
+
+# yaml
+
+![image-20201223154244531](/Users/zouyu/Desktop/react-zy/img/image-20201223154244531.png)
+
+# umi
+
+![image-20201223195356518](/Users/zouyu/Desktop/react-zy/img/image-20201223195356518.png)
